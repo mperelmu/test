@@ -18,7 +18,7 @@ pipeline {
             agent { node { label 'docker' } }
             steps {
                 script {
-                    dockerBuild 
+                    dockerBuild 'mperelmu/test'
                 }
             }
         }
