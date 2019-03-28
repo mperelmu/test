@@ -18,17 +18,7 @@ pipeline {
             agent { node { label 'docker' } }
             steps {
                 script {
-                    dockerBuild 'mperelmu/test'
-                }
-            }
-        }
-        stage('Test') {
-            agent { node { label 'docker' } }
-            steps {
-                script {
-                    if (params.RUN_TESTS == true) {
-                        sh 'cd tests; ./startJob.sh'
-                    }
+                    docker.build
                 }
             }
         }
