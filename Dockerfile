@@ -1,7 +1,13 @@
-RUN apt-get update \
-&& apt-get install -y curl \
-&& rm -rf /var/lib/apt/lists/*
+# use a node base image
+FROM node:7-onbuild
 
-RUN curl -LO "https://nodejs.org/dist/v0.12.5/node-v0.12.5-linux-x64.tar.gz" \
-&& tar -xzf node-v0.12.5-linux-x64.tar.gz -C /usr/local --strip-components=1 \
-&& rm node-v0.12.5-linux-x64.tar.gz
+# set maintainer
+LABEL maintainer "miiro@getintodevops.com"
+
+# set a health check
+HEALTHCHECK --interval=5s \
+            --timeout=5s \
+            CMD curl -f http://127.0.0.1:8000 || exit 1
+
+# tell docker what port to expose
+EXPOSE 8000

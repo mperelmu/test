@@ -18,7 +18,7 @@ pipeline {
             agent { node { label 'docker' } }
             steps {
                 script {
-                    docker.build
+                    docker.build("test:latest")
                 }
             }
         }
